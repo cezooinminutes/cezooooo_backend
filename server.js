@@ -1,7 +1,6 @@
 require("dotenv").config();
 
 const express = require("express");
-
 const app = express();
 
 const firebaseConfig = {
@@ -14,6 +13,7 @@ const firebaseConfig = {
   measurementId: process.env.FIREBASE_MEASUREMENT_ID
 };
 
+// Home Route
 app.get("/", (req, res) => {
   res.json({
     status: "success",
@@ -22,8 +22,21 @@ app.get("/", (req, res) => {
   });
 });
 
+// Firebase Config Route
+app.get("/firebase-config", (req, res) => {
+  res.json({
+    apiKey: firebaseConfig.apiKey,
+    authDomain: firebaseConfig.authDomain,
+    projectId: firebaseConfig.projectId,
+    storageBucket: firebaseConfig.storageBucket,
+    messagingSenderId: firebaseConfig.messagingSenderId,
+    appId: firebaseConfig.appId,
+    measurementId: firebaseConfig.measurementId
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
