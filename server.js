@@ -1,7 +1,12 @@
 require("dotenv").config();
 
 const express = require("express");
+const cors = require("cors");
+
 const app = express();
+
+// Enable CORS
+app.use(cors());
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -13,7 +18,6 @@ const firebaseConfig = {
   measurementId: process.env.FIREBASE_MEASUREMENT_ID
 };
 
-// Home Route
 app.get("/", (req, res) => {
   res.json({
     status: "success",
@@ -22,17 +26,8 @@ app.get("/", (req, res) => {
   });
 });
 
-// Firebase Config Route
 app.get("/firebase-config", (req, res) => {
-  res.json({
-    apiKey: firebaseConfig.apiKey,
-    authDomain: firebaseConfig.authDomain,
-    projectId: firebaseConfig.projectId,
-    storageBucket: firebaseConfig.storageBucket,
-    messagingSenderId: firebaseConfig.messagingSenderId,
-    appId: firebaseConfig.appId,
-    measurementId: firebaseConfig.measurementId
-  });
+  res.json(firebaseConfig);
 });
 
 const PORT = process.env.PORT || 5000;
