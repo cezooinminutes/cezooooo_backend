@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+
 const app = express();
 
 const firebaseConfig = {
@@ -15,8 +16,9 @@ const firebaseConfig = {
 
 app.get("/", (req, res) => {
   res.json({
+    status: "success",
     message: "Cezo Backend Running",
-    projectId: firebaseConfig.projectId
+    firebaseProject: firebaseConfig.projectId
   });
 });
 
